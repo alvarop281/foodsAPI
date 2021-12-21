@@ -2,6 +2,9 @@ import express, {Application}  from "express";
 import morgan from "morgan";
 import cors from "cors"
 
+// Route imports
+import authRouter from './routes/auth/auth.routes';
+
 export class App{
     private app: Application;
 
@@ -27,6 +30,13 @@ export class App{
 
     // Routes
     routes(){
+
+        // Auth
+        this.app.use('/foods/api/v1/auth', authRouter);
+            //post    http://localhost:3000/foods/api/v1/auth/signin/    Public    Ready
+            //post    http://localhost:3000/foods/api/v1/auth/login/    Public
+            //get     http://localhost:3000/foods/api/v1/auth/profile/  Public
+
     }
 
     // Listening 

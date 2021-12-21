@@ -7,4 +7,6 @@ export async function connect(){
         database: process.env.DB,
         connectionLimit: 10
     });
+
+    return connection;
 }

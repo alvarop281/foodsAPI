@@ -108,8 +108,9 @@ CREATE TABLE `orders` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `full_name` varchar(191) NOT NULL,
-  `dni` varchar(191) DEFAULT NULL,
-  `phone_number` varchar(191) DEFAULT NULL,
+  `dni` varchar(191) UNIQUE NOT NULL,
+  `password` VARCHAR(191) NOT NULL,
+  `phone_number` varchar(191) UNIQUE NOT NULL,
   `type_of_user` varchar(191) DEFAULT 'buyer',
   `created_at` timestamp NOT NULL DEFAULT curtime()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
