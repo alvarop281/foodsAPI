@@ -12,29 +12,29 @@ export async function createUser( newUser: UserI ){
     return 0;
 }
 
-export async function selectUserByPhoneAndDNI( phone: string, dni: string){
+export async function selectUserByPhoneAndDNI(  dni: string, phone: string ){
     const conn = await connect();
 
-    const user: any = await conn.query( 'SELECT * FROM users WHERE users.dni = ? AND users.phone_number = ?', [phone, dni] )
+    const user: any = await conn.query( 'SELECT id, full_name, dni, phone_number FROM users WHERE users.dni = ? AND users.phone_number = ?', [dni, phone] )
     conn.end();
-
+    
     return user[0][0];
 }
 
 export async function selectUserByDNI( dni: string ){
     const conn = await connect();
 
-    const user: any = await conn.query( 'SELECT * FROM users WHERE users.dni = ? ', dni )
+    const user: any = await conn.query( 'SELECT * FROM users WHERE users.dni = ?', dni )
     conn.end();
-
+    
     return user[0][0];
 }
 
 export async function selectUserByPhone( phone: string ){
     const conn = await connect();
 
-    const user: any = await conn.query( 'SELECT * FROM users WHERE users.phone_number = ? ', phone )
+    const user: any = await conn.query( 'SELECT * FROM users WHERE users.phone_number = ?', phone )
     conn.end();
-
+    
     return user[0][0];
 }

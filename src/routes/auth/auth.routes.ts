@@ -16,6 +16,6 @@ router.route('/signin/').post([
         body('password').isLength( {min: 6} ).withMessage('You must enter a password with at least 6 digits'),
         body('dni').isLength( {min:9} ).withMessage('You must indicate your DNI'),
         body('phone_number').isLength( {min:12} ).withMessage('You must indicate your Phone Number'),
-    ], /*validationRequest,*/ signin);
+    ], validationRequest, signin);
 
 export default router;
