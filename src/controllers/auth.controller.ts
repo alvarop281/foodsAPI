@@ -9,7 +9,8 @@ import { UserI } from '../interfaces/UserI';
 import { createUser, 
          selectUserByPhoneAndDNI, 
          selectUserByDNI,
-         selectUserByPhone } from "../models/user.model";
+         selectUserByPhone,
+         selectUserById } from "../models/user.model";
 
 // Middleware
 import { successResponse, failResponse } from '../middlewares/response';
@@ -45,5 +46,57 @@ export async function signin(req: Request, res: Response): Promise<Response> {
     // Success Response
     return res.status(201).json(
         successResponse( { user }, { message: "User Created", token } )
+    )
+}
+
+export async function login( req: Request, res: Response ) {
+    const phone_number = req.body.phone_number;
+
+    try{
+        const findUser: UserI = await selectUserByPhone( phone_number );
+        const passwordCredential = findUser.password;
+
+        // Compare password
+        const isValid = await bcrypt.compare(req.body.password, passwordCredential);
+        if(!isValid) return res.status(401).json(
+            failResponse({
+                "msg": "Invalid password",
+                "param": "password",
+            })
+        )
+
+        // Retrieve user_id to create the token
+        const user: UserI = await selectUserByPhoneAndDNI( findUser.dni, findUser.phone_number );
+        const token: string = jwt.sign({user}, process.env.TOKEN_SECRET|| 'secretToken', {
+            expiresIn: 60 * 60 * 24 * 31
+        });
+
+        // Success Response
+        return res.status(200).json(
+            successResponse( { user }, { token } )
+        )
+
+        
+    }catch( err ){
+        return res.status(401).json(
+            failResponse({
+                "msg": "Invalid phone number",
+                "param": "phone_number",
+            })
+        )
+    }
+
+}
+
+export async function profile(req: Request, res: Response): Promise<Response>{
+    // Save request data
+    const userReq: any = req.user;
+    const id = userReq.id;
+    // User model
+    const user = await selectUserById(id);
+
+    // Success Response
+    return res.status(200).json(
+        successResponse( { user }, [] )
     )
 }

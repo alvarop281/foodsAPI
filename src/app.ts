@@ -33,8 +33,8 @@ export class App{
 
         // Auth
         this.app.use('/foods/api/v1/auth', authRouter);
-            //post    http://localhost:3000/foods/api/v1/auth/signin/    Public    Ready
-            //post    http://localhost:3000/foods/api/v1/auth/login/    Public
+            //post    http://localhost:3000/foods/api/v1/auth/signin/   Public    Ready
+            //post    http://localhost:3000/foods/api/v1/auth/login/    Public    Ready
             //get     http://localhost:3000/foods/api/v1/auth/profile/  Public
 
     }
