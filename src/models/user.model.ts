@@ -47,3 +47,12 @@ export async function selectUserById(id:number) {
     
     return user[0][0];
 }
+
+export async function selectTypeOfUserById( id: number | undefined ){
+    const conn = await connect();
+
+    const type_of_user: any = await conn.query( 'SELECT type_of_user FROM users WHERE users.id=?', id );
+    conn.end();
+    
+    return type_of_user[0][0].type_of_user;
+}

@@ -4,6 +4,7 @@ import cors from "cors"
 
 // Route imports
 import authRouter from './routes/auth/auth.routes';
+import categoryRouter from './routes/categories/categories.routes';
 
 export class App{
     private app: Application;
@@ -33,10 +34,16 @@ export class App{
 
         // Auth
         this.app.use('/foods/api/v1/auth', authRouter);
-            //post    http://localhost:3000/foods/api/v1/auth/signin/   Public    Ready
-            //post    http://localhost:3000/foods/api/v1/auth/login/    Public    Ready
-            //get     http://localhost:3000/foods/api/v1/auth/profile/  Public
+            //post    http://localhost:3000/foods/api/v1/auth/signin/       Public
+            //post    http://localhost:3000/foods/api/v1/auth/login/        Public
+            //get     http://localhost:3000/foods/api/v1/auth/profile/      Public
 
+        this.app.use('/foods/api/v1/categories', categoryRouter)
+            //get     http://localhost:3000/foods/api/v1/categories/        Public
+            //get     http://localhost:3000/foods/api/v1/categories/:id     Public
+            //post    http://localhost:3000/foods/api/v1/categories/:id     Only admin
+            //put     http://localhost:3000/foods/api/v1/categories/:id     Only admin
+            //delete  http://localhost:3000/foods/api/v1/categories/:id     Only admin
     }
 
     // Listening 
