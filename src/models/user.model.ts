@@ -56,3 +56,29 @@ export async function selectTypeOfUserById( id: number | undefined ){
     
     return type_of_user[0][0].type_of_user;
 }
+
+export async function updateAUser ( data: any, id: string ){
+    const conn = await connect();
+
+    await conn.query('UPDATE users SET ? WHERE users.id =?', [data, id]);
+    conn.end();
+
+    return 0;
+}
+
+
+export async function selectUserDniByDNIAndId( dni: string, id: string ){
+    const conn = await connect();
+    const user: any = await conn.query( 'SELECT * FROM users WHERE users.dni = ? AND users.id <>?', [ dni, id ] );
+    conn.end();
+
+    return user[0][0];
+}
+
+export async function selectUserPhoneByPhoneAndId( phone: string, id: string ){
+    const conn = await connect();
+    const user: any = await conn.query( 'SELECT * FROM users WHERE users.phone_number = ? AND users.id <>?', [ phone, id ] );
+    conn.end();
+
+    return user[0][0];
+}

@@ -7,6 +7,7 @@ import upload from 'express-fileupload';
 import authRouter from './routes/auth/auth.routes';
 import categoryRouter from './routes/categories/categories.routes';
 import foodRouter from './routes/foods/foods.routes';
+import userRouter from './routes/users/users.routes';
 
 export class App{
     private app: Application;
@@ -46,7 +47,7 @@ export class App{
             //post    http://localhost:3000/foods/api/v1/auth/login/            Public
             //get     http://localhost:3000/foods/api/v1/auth/profile/          Public
 
-        this.app.use('/foods/api/v1/categories', categoryRouter)
+        this.app.use('/foods/api/v1/categories', categoryRouter);
             //get     http://localhost:3000/foods/api/v1/categories/            Public
             //post    http://localhost:3000/foods/api/v1/categories/            Only admin
             //get     http://localhost:3000/foods/api/v1/categories/:id         Public
@@ -59,6 +60,10 @@ export class App{
             //get     http://localhost:3000/foods/api/v1/foods/:id              Public
             //put     http://localhost:3000/foods/api/v1/foods/:id              Only admin
             //delete  http://localhost:3000/foods/api/v1/foods/:id              Only admin
+
+        this.app.use('/foods/api/v1/users', userRouter);
+            //put     http://localhost:3000/foods/api/v1/users/:id              Only the owner
+            //get     http://localhost:3000/foods/api/v1/users/:id/addresses/   Only the owner
     }
 
     // Listening 
