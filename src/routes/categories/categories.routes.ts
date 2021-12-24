@@ -16,6 +16,12 @@ import {
     deleteCategory
 } from '../../controllers/categories.controller';
 
+// Food Controller
+import { 
+    getAllFoodsByCategoryId, 
+    createFood 
+} from '../../controllers/foods.controllers'
+
 router.route('/')
     .get(getAllCategories)
     .post([
@@ -32,5 +38,16 @@ router.route('/:categoryId')
         body('icon').isLength({ min: 2 }).withMessage('must be at least 2 chars long')
     ], validationRequest, validationToken, adminAccess, updateCategory)
     .delete(validationRequest, validationToken, adminAccess, deleteCategory);
+
+router.route('/:categoryId/foods/')
+    .get(getAllFoodsByCategoryId)
+    .post([
+        body('id').optional().not().exists().withMessage('Invalid request'),
+        body('title').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
+        body('price').isFloat().withMessage('You must indicate a price'),
+        body('description').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
+        body('ingredients').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
+        body('category_id').optional().not().exists().withMessage('Invalid request'),
+    ], validationRequest, validationToken, adminAccess, createFood);
 
 export default router;

@@ -16,7 +16,15 @@ import { selectAllCategories,
 } from '../models/category.model';
 
 export async function getAllCategories( req: Request, res: Response ) {
-    const categories: CategoryI = await selectAllCategories();
+    const categories: CategoryI[] = await selectAllCategories();
+
+    // Fail response
+    if(!categories[0]) return res.status(401).json(
+        failResponse({
+            "msg": "Categories do not exist",
+            "param": "categoryID",
+        })
+    );
 
     // Success Response
     return res.status(200).json(
