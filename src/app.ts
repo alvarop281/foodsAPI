@@ -66,6 +66,8 @@ export class App{
             //get     http://localhost:3000/foods/api/v1/users/:id/addresses/     Only the owner
             //post    http://localhost:3000/foods/api/v1/users/:id/addresses/     Only the owner
             //get     http://localhost:3000/foods/api/v1/users/:id/addresses/:id  Only the owner
+            //put     http://localhost:3000/foods/api/v1/users/:id/addresses/:id  Only the owner
+            //delete  http://localhost:3000/foods/api/v1/users/:id/addresses/:id  Only the owner
     }
 
     // Listening 

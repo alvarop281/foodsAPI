@@ -12,7 +12,9 @@ import { updateUser } from '../../controllers/users.controller';
 import { 
     getAllAddressFromUser, 
     createAddress,
-    getAddressFromUser
+    getAddressFromUser,
+    updateAddress,
+    deleteAddress
 } from '../../controllers/addresses.controller';
 
 router.route('/:userId')
@@ -34,6 +36,13 @@ router.route('/:userId/addresses')
     ], validationRequest, validationToken, validateResourceOwner, createAddress);
 
 router.route('/:userId/addresses/:addressId')
-    .get( validationToken, validateResourceOwner, getAddressFromUser);
+    .get( validationToken, validateResourceOwner, getAddressFromUser)
+    .put([
+        body('id').optional().not().exists().withMessage('Invalid request'),
+        body('user_id').optional().not().exists().withMessage('Invalid request'),
+        body('address').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
+        body('reference').isLength({ min: 2 }).withMessage('must be at least 2 chars long')
+    ], validationRequest, validationToken, validateResourceOwner, updateAddress)
+    .delete( validationToken, validateResourceOwner, deleteAddress);
 
 export default router;

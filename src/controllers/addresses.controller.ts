@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { request, Request, Response } from 'express';
 
 // Middleware
 import { successResponse, failResponse } from '../middlewares/response';
@@ -11,7 +11,9 @@ import {
     selectAdrressesByUserId,
     createAAddress,
     selectAdrressesByUserIAndDescriptionAndReference,
-    selectAdrressByUserIdAndAddressId
+    selectAdrressByUserIdAndAddressId,
+    updateAddressById,
+    deleteAdrressById
 } from '../models/address.model';
 
 export async function getAllAddressFromUser( req: Request, res: Response ){
@@ -64,5 +66,52 @@ export async function getAddressFromUser( req: Request, res: Response ){
     // Success Response
     return res.status(200).json(
         successResponse( { address }, [] )
+    )
+}
+
+export async function updateAddress( req: Request, res: Response ){
+    // Save Data from request
+    const userId: string = req.params.userId;
+    const addressId: string = req.params.addressId;
+    const address: AddressI = req.body;
+
+    const chechAddressExist = await selectAdrressByUserIdAndAddressId( userId, addressId );
+    if ( !chechAddressExist ) return res.status(401).json(
+        failResponse({
+            "msg": "Addresses do not exist",
+            "param": "userId",
+        })
+    );
+
+    await updateAddressById( address, addressId );
+
+    // Restore data
+    address['id'] = addressId;
+    address['user_id'] = userId;
+
+    // Success Response
+    return res.status(201).json(
+        successResponse( { address }, { message: "Address was updated" } )
+    )
+}
+
+export async function deleteAddress( req: Request, res: Response ){
+    // Save Data from request
+    const userId: string = req.params.userId;
+    const addressId: string = req.params.addressId;
+
+    const chechAddressExist = await selectAdrressByUserIdAndAddressId( userId, addressId );
+    if ( !chechAddressExist ) return res.status(401).json(
+        failResponse({
+            "msg": "Addresses do not exist",
+            "param": "userId",
+        })
+    );
+
+    await deleteAdrressById( addressId );
+
+    // Success Response
+    return res.status(201).json(
+        successResponse( { }, { message: "Address was deleted" } )
     )
 }
