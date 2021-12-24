@@ -48,22 +48,24 @@ export class App{
             //get     http://localhost:3000/foods/api/v1/auth/profile/          Public
 
         this.app.use('/foods/api/v1/categories', categoryRouter);
-            //get     http://localhost:3000/foods/api/v1/categories/            Public
-            //post    http://localhost:3000/foods/api/v1/categories/            Only admin
-            //get     http://localhost:3000/foods/api/v1/categories/:id         Public
-            //put     http://localhost:3000/foods/api/v1/categories/:id         Only admin
-            //delete  http://localhost:3000/foods/api/v1/categories/:id         Only admin
-            //get     http://localhost:3000/foods/api/v1/categories/:id/foods/  Public
-            //post    http://localhost:3000/foods/api/v1/categories/:id/foods/  Only admin
+            //get     http://localhost:3000/foods/api/v1/categories/              Public
+            //post    http://localhost:3000/foods/api/v1/categories/              Only admin
+            //get     http://localhost:3000/foods/api/v1/categories/:id           Public
+            //put     http://localhost:3000/foods/api/v1/categories/:id           Only admin
+            //delete  http://localhost:3000/foods/api/v1/categories/:id           Only admin
+            //get     http://localhost:3000/foods/api/v1/categories/:id/foods/    Public
+            //post    http://localhost:3000/foods/api/v1/categories/:id/foods/    Only admin
 
         this.app.use('/foods/api/v1/foods', foodRouter)
-            //get     http://localhost:3000/foods/api/v1/foods/:id              Public
-            //put     http://localhost:3000/foods/api/v1/foods/:id              Only admin
-            //delete  http://localhost:3000/foods/api/v1/foods/:id              Only admin
+            //get     http://localhost:3000/foods/api/v1/foods/:id                Public
+            //put     http://localhost:3000/foods/api/v1/foods/:id                Only admin
+            //delete  http://localhost:3000/foods/api/v1/foods/:id                Only admin
 
         this.app.use('/foods/api/v1/users', userRouter);
-            //put     http://localhost:3000/foods/api/v1/users/:id              Only the owner
-            //get     http://localhost:3000/foods/api/v1/users/:id/addresses/   Only the owner
+            //put     http://localhost:3000/foods/api/v1/users/:id                Only the owner
+            //get     http://localhost:3000/foods/api/v1/users/:id/addresses/     Only the owner
+            //post    http://localhost:3000/foods/api/v1/users/:id/addresses/     Only the owner
+            //get     http://localhost:3000/foods/api/v1/users/:id/addresses/:id  Only the owner
     }
 
     // Listening 

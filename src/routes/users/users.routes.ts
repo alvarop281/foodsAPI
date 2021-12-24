@@ -9,7 +9,11 @@ import { validateResourceOwner } from '../../middlewares/validateResourceOwner';
 
 // Controllers
 import { updateUser } from '../../controllers/users.controller';
-import { getAllAddressFromUser } from '../../controllers/addresses.controller';
+import { 
+    getAllAddressFromUser, 
+    createAddress,
+    getAddressFromUser
+} from '../../controllers/addresses.controller';
 
 router.route('/:userId')
     .put([
@@ -22,5 +26,14 @@ router.route('/:userId')
 
 router.route('/:userId/addresses')
     .get( validationToken, validateResourceOwner, getAllAddressFromUser )
+    .post([
+        body('id').optional().not().exists().withMessage('Invalid request'),
+        body('user_id').optional().not().exists().withMessage('Invalid request'),
+        body('address').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
+        body('reference').isLength({ min: 2 }).withMessage('must be at least 2 chars long')
+    ], validationRequest, validationToken, validateResourceOwner, createAddress);
+
+router.route('/:userId/addresses/:addressId')
+    .get( validationToken, validateResourceOwner, getAddressFromUser);
 
 export default router;

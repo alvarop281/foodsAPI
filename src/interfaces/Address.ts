@@ -1,6 +1,6 @@
 export interface AddressI{
     id?: string;
-    description: string;
+    address: string;
     reference: string;
     user_id: string;
 }
