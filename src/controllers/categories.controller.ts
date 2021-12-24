@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
-// Category Interface
+// Interface
 import { CategoryI } from '../interfaces/CategoryI';
+import { FoodI } from '../interfaces/FoodI';
 
 // Middleware
 import { successResponse, failResponse } from '../middlewares/response';
@@ -14,6 +15,7 @@ import { selectAllCategories,
         updateCategoryById,
         deleteCategoryById
 } from '../models/category.model';
+import { selectAllFoodsByCategoryId } from '../models/food.model';
 
 export async function getAllCategories( req: Request, res: Response ) {
     const categories: CategoryI[] = await selectAllCategories();
@@ -98,6 +100,15 @@ export async function deleteCategory( req: Request, res: Response ) {
     if(!isValid) return res.status(401).json(
         failResponse({
             "msg": "Category does not exist",
+            "param": "categoryID",
+        })
+    );
+
+    // Check if category has foods
+    const foods: FoodI[] = await selectAllFoodsByCategoryId( id );
+    if ( foods ) return res.status(401).json(
+        failResponse({
+            "msg": "Category has foods",
             "param": "categoryID",
         })
     );
