@@ -107,11 +107,11 @@ export async function updateOrder( req: Request, res: Response ){
             );
 
             // Validate the file type
-            if( proof.mimetype !== 'image/png' ){
+            if( proof.mimetype !== 'image/png' && proof.mimetype !== 'image/jpeg' ){
 
                 return res.status(401).json(
                     failResponse({
-                        "msg": "File type must be image/png",
+                        "msg": "File type must be png or jpeg",
                          "param": "File type"
                     })
                 );
