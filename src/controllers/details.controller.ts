@@ -51,7 +51,7 @@ export async function createDetail( req: Request, res: Response ){
 
     // Success Response
     return res.status(201).json(
-        successResponse( { detail }, { message: "Detail was Created" } )
+        successResponse( { detail }, { message: "Detail was created" } )
     )
 }
 
@@ -77,7 +77,7 @@ export async function updateDetail( req: Request, res: Response ){
     
     // Success Response
     return res.status(200).json(
-        successResponse( { detail }, { message: "Detail was Updated" } )
+        successResponse( { detail }, { message: "Detail was updated" } )
     )
 }
 

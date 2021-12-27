@@ -45,7 +45,7 @@ export async function signin(req: Request, res: Response): Promise<Response> {
 
     // Success Response
     return res.status(201).json(
-        successResponse( { user }, { message: "User Created", token } )
+        successResponse( { user }, { message: "User was created", token } )
     )
 }
 

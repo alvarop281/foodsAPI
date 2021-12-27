@@ -63,7 +63,7 @@ export async function createCategory( req: Request, res: Response ){
 
     // Success Response
     return res.status(201).json(
-        successResponse( { category }, { message: "Category was Created" } )
+        successResponse( { category }, { message: "Category was created" } )
     )
 }
 

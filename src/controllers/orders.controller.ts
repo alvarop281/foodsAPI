@@ -144,7 +144,7 @@ export async function updateOrder( req: Request, res: Response ){
 
     // Success Response
     return res.status(200).json(
-        successResponse( { order }, { message: "Order was Updated" } )
+        successResponse( { order }, { message: "Order was updated" } )
     )
 
 }

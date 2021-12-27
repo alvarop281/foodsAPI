@@ -103,7 +103,7 @@ export async function createFood( req: Request, res: Response ){
 
      // Success Response
      return res.status(201).json(
-        successResponse( { newFood }, { message: "Food was Created" } )
+        successResponse( { newFood }, { message: "Food was created" } )
     )
 }
 
@@ -135,7 +135,7 @@ export async function deleteFood( req: Request, res: Response ){
 
     // Success Response
     return res.status(200).json(
-        successResponse( { }, { message: "Food was Deleted" } )
+        successResponse( { }, { message: "Food was deleted" } )
     )
 
 }
@@ -190,7 +190,7 @@ export async function updateFood( req: Request, res: Response ){
 
     // Success Response
     return res.status(200).json(
-        successResponse( { food }, { message: "Food was Updated" } )
+        successResponse( { food }, { message: "Food was updated" } )
     )
 }
 
