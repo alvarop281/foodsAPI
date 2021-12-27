@@ -8,6 +8,7 @@ import authRouter from './routes/auth/auth.routes';
 import categoryRouter from './routes/categories/categories.routes';
 import foodRouter from './routes/foods/foods.routes';
 import userRouter from './routes/users/users.routes';
+import orderDetailRouter from './routes/orders/orders.routes';
 
 export class App{
     private app: Application;
@@ -71,6 +72,11 @@ export class App{
             //get     http://localhost:3000/foods/api/v1/users/:id/orders/        Only the owner
             //post    http://localhost:3000/foods/api/v1/users/:id/orders/        Only the owner
             //put     http://localhost:3000/foods/api/v1/users/:id/orders/:id     Only the owner
+
+        this.app.use('/foods/api/v1/orders', orderDetailRouter);
+            //post    http://localhost:3000/foods/api/v1/orders/:id/details/      Only the owner
+            //put     http://localhost:3000/foods/api/v1/orders/:id/details/:id   Only the owner
+            //delete  http://localhost:3000/foods/api/v1/orders/:id/details/:id   Only the owner
     }
 
     // Listening 

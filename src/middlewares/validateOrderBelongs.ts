@@ -11,7 +11,6 @@ import { failResponse } from "./response";
 
 export async function OrderBelongsToUser( req: Request, res: Response, next: NextFunction ){
     // Save params
-    const userId: string = req.params.userId;
     const orderId: string = req.params.orderId;
 
     // find order
@@ -26,7 +25,7 @@ export async function OrderBelongsToUser( req: Request, res: Response, next: Nex
     );
 
     // Validate if the order belongs to the user
-    if ( order.user_id != userId ) return res.status(401).json(
+    if ( order.user_id != req.user.id?.toString() ) return res.status(401).json(
         failResponse({
             "msg": "The order does not belong to the user",
             "param": "orderId",
