@@ -53,8 +53,8 @@ export async function selectAllOrders( req: Request, res: Response ){
     );
 
     // Success Response
-    return res.status(201).json(
-        successResponse( { orders }, { message: "Order was created" } )
+    return res.status(200).json(
+        successResponse( { orders }, { } )
     )
 
 }

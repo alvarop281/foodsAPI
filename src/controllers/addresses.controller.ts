@@ -90,7 +90,7 @@ export async function updateAddress( req: Request, res: Response ){
     address['user_id'] = userId;
 
     // Success Response
-    return res.status(201).json(
+    return res.status(200).json(
         successResponse( { address }, { message: "Address was updated" } )
     )
 }
@@ -111,7 +111,7 @@ export async function deleteAddress( req: Request, res: Response ){
     await deleteAdrressById( addressId );
 
     // Success Response
-    return res.status(201).json(
+    return res.status(200).json(
         successResponse( { }, { message: "Address was deleted" } )
     )
 }

@@ -134,7 +134,7 @@ export async function deleteFood( req: Request, res: Response ){
     await deleteFoodById( id );
 
     // Success Response
-    return res.status(201).json(
+    return res.status(200).json(
         successResponse( { }, { message: "Food was Deleted" } )
     )
 

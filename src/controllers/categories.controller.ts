@@ -62,8 +62,8 @@ export async function createCategory( req: Request, res: Response ){
     const category: CategoryI = await selectCategoryByDescriptionAndIcon( newCategory.description, newCategory.icon );
 
     // Success Response
-    return res.status(200).json(
-        successResponse( { category }, { message: "Category Created" } )
+    return res.status(201).json(
+        successResponse( { category }, { message: "Category was Created" } )
     )
 }
 
