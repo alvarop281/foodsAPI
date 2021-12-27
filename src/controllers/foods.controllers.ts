@@ -27,7 +27,7 @@ export async function getAllFoodsByCategoryId( req: Request, res: Response ) {
     if(!foods[0]) return res.status(401).json(
         failResponse({
             "msg": "Foods do not exist",
-            "param": "categoryID",
+            "param": "category_id",
         })
     );
 
@@ -46,7 +46,7 @@ export async function getFoodById( req: Request, res: Response ) {
     if(!food) return res.status(401).json(
         failResponse({
             "msg": "Food do not exist",
-            "param": "categoryID",
+            "param": "category_id",
         })
     );
 
@@ -65,7 +65,7 @@ export async function createFood( req: Request, res: Response ){
     if(!category) return res.status(401).json(
         failResponse({
             "msg": "Category do not exist",
-            "param": "categoryID",
+            "param": "category_id",
         })
     );
 
@@ -115,7 +115,7 @@ export async function deleteFood( req: Request, res: Response ){
     if(!food) return res.status(401).json(
         failResponse({
             "msg": "Food do not exist",
-            "param": "ID",
+            "param": "id",
         })
     );
 
@@ -149,7 +149,7 @@ export async function updateFood( req: Request, res: Response ){
     if ( !oldfood ) return res.status(401).json(
         failResponse({
             "msg": "Food do not exist",
-            "param": "ID",
+            "param": "id",
         })
     );
 

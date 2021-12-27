@@ -58,8 +58,8 @@ export async function getAddressFromUser( req: Request, res: Response ){
     // Fail response
     if(!address) return res.status(401).json(
         failResponse({
-            "msg": "Addresses do not exist",
-            "param": "userId",
+            "msg": "Address does not exist",
+            "param": "user_id",
         })
     );
 
@@ -78,8 +78,8 @@ export async function updateAddress( req: Request, res: Response ){
     const chechAddressExist = await selectAdrressByUserIdAndAddressId( userId, addressId );
     if ( !chechAddressExist ) return res.status(401).json(
         failResponse({
-            "msg": "Addresses do not exist",
-            "param": "userId",
+            "msg": "Address do not exist",
+            "param": "user_id",
         })
     );
 
@@ -103,8 +103,8 @@ export async function deleteAddress( req: Request, res: Response ){
     const chechAddressExist = await selectAdrressByUserIdAndAddressId( userId, addressId );
     if ( !chechAddressExist ) return res.status(401).json(
         failResponse({
-            "msg": "Addresses do not exist",
-            "param": "userId",
+            "msg": "Address do not exist",
+            "param": "user_id",
         })
     );
 

@@ -106,7 +106,7 @@ export async function getAllDetail( req: Request, res: Response ){
     if(!details[0]) return res.status(401).json(
         failResponse({
             "msg": "Details do not exist",
-            "param": "OrderId",
+            "param": "order_id",
         })
     );
 

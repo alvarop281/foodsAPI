@@ -48,7 +48,7 @@ export async function selectAllOrders( req: Request, res: Response ){
     if ( !orders ) return res.status(401).json(
         failResponse({
             "msg": "Orders do not exist",
-            "param": "Order",
+            "param": "id",
         })
     );
 
@@ -72,7 +72,7 @@ export async function updateOrder( req: Request, res: Response ){
     if( details.length === 0 ) return res.status(401).json(
         failResponse({
             "msg": "Details do not exist",
-            "param": "orderId",
+            "param": "id",
         })
     );
 

@@ -24,7 +24,7 @@ export async function getAllCategories( req: Request, res: Response ) {
     if(!categories[0]) return res.status(401).json(
         failResponse({
             "msg": "Categories do not exist",
-            "param": "categoryID",
+            "param": "id",
         })
     );
 
@@ -48,7 +48,7 @@ export async function getCategoryByID( req: Request, res: Response ){
         return res.status(401).json(
             failResponse({
                 "msg": "Category does not exist",
-                "param": "categoryID",
+                "param": "id",
             })
         );
 
@@ -76,7 +76,7 @@ export async function updateCategory( req: Request, res: Response ) {
     if(!isValid) return res.status(401).json(
         failResponse({
             "msg": "Category does not exist",
-            "param": "categoryID",
+            "param": "id",
         })
     );
 
@@ -100,7 +100,7 @@ export async function deleteCategory( req: Request, res: Response ) {
     if(!isValid) return res.status(401).json(
         failResponse({
             "msg": "Category does not exist",
-            "param": "categoryID",
+            "param": "id",
         })
     );
 
@@ -109,7 +109,7 @@ export async function deleteCategory( req: Request, res: Response ) {
     if ( foods ) return res.status(401).json(
         failResponse({
             "msg": "Category has foods",
-            "param": "categoryID",
+            "param": "id",
         })
     );
 
