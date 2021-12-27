@@ -42,6 +42,10 @@ export class App{
     // Routes
     routes(){
 
+        // Show Images
+        this.app.use(express.static('uploads/foods'));
+            //        http://localhost:3000/image.png                           Public
+
         // Auth
         this.app.use('/foods/api/v1/auth', authRouter);
             //post    http://localhost:3000/foods/api/v1/auth/signin/           Public
