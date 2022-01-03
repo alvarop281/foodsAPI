@@ -10,10 +10,10 @@ import { UPayload } from '../interfaces/UPayload';
 export function validationToken(req: Request, res: Response, next: NextFunction){
     const token = req.header('auth-token');
     if(!token) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Access denied",
             "param": "token",
-        })
+        }])
     )
 
     try{
@@ -24,10 +24,10 @@ export function validationToken(req: Request, res: Response, next: NextFunction)
     }catch( err ){
 
         return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "Access denied",
                 "param": "token",
-            })
+            }])
         )
         
     }

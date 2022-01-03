@@ -46,10 +46,10 @@ export async function selectAllOrders( req: Request, res: Response ){
     
     // Validate if the user has orders.
     if ( !orders ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Orders do not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Success Response
@@ -70,10 +70,10 @@ export async function updateOrder( req: Request, res: Response ){
     // check if the order has details uploaded
     const details: DetailI[] = await selectAllDetailsByOrderId( orderId );
     if( details.length === 0 ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Details do not exist",
             "param": "id",
-        })
+        }])
     );
 
     // check delivery_method field
@@ -85,10 +85,10 @@ export async function updateOrder( req: Request, res: Response ){
         // check if address exists
         const address = await selectAdrressByUserIdAndAddressId( userId, order['address_id'] );
         if( !address ) return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "Address does not exist",
                 "param": "address_id",
-            })
+            }])
         );
     }
 
@@ -100,27 +100,27 @@ export async function updateOrder( req: Request, res: Response ){
             // validate if the image exists
             const proof: any = req.files.proof_of_payment;
             if( !proof ) return res.status(401).json(
-                failResponse({
+                failResponse([{
                     "msg": "images does not exist",
                     "param": "proof_of_payment",
-                })
+                }])
             );
 
             // Validate the file type
             if( proof.mimetype !== 'image/png' && proof.mimetype !== 'image/jpeg' ){
 
                 return res.status(401).json(
-                    failResponse({
+                    failResponse([{
                         "msg": "File type must be png or jpeg",
                          "param": "File type"
-                    })
+                    }])
                 );
             }
 
             // Store file
             proof.mv('./uploads/proof/' + userId + '/' + orderId  + '/' + proof.name, function ( error: any ){
                 if(error) return res.status(401).json(
-                    failResponse( {errors: error} )
+                    failResponse( [{errors: error}] )
                 );
             });
 
@@ -129,10 +129,10 @@ export async function updateOrder( req: Request, res: Response ){
             
         } else {
             return res.status(401).json(
-                failResponse({
+                failResponse([{
                     "msg": "images does not exist",
                     "param": "proof_of_payment",
-                })
+                }])
             );
         }
     }

@@ -26,19 +26,19 @@ export async function createDetail( req: Request, res: Response ){
     // find food data
     const food: FoodI = await selectFoodById( oldDetail['food_id'] );
     if ( !food ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Food does not exist",
             "param": "food_id",
-        })
+        }])
     );
 
     // check if the record to create already exists
     const recordExist: DetailI = await selectDetailByOrderIdAndFoodId( oldDetail['order_id'], oldDetail['food_id'] );
     if ( recordExist ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Food already exists",
             "param": "food_id",
-        })
+        }])
     );
 
     // Save data
@@ -59,10 +59,10 @@ export async function updateDetail( req: Request, res: Response ){
 
     let detail: DetailI = await selectDetailByOrderIdAndId( req.params.orderId, req.params.detailId );
     if ( !detail ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Bad request",
             "param": "food_id",
-        })
+        }])
     );
 
     // find food data
@@ -84,10 +84,10 @@ export async function updateDetail( req: Request, res: Response ){
 export async function deleteDetail( req: Request, res: Response ){
     let detail: DetailI = await selectDetailByOrderIdAndId( req.params.orderId, req.params.detailId );
     if ( !detail ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Bad request",
             "param": "food_id",
-        })
+        }])
     );
 
     await deleteDetailById( req.params.detailId );
@@ -104,10 +104,10 @@ export async function getAllDetail( req: Request, res: Response ){
 
     // Fail response
     if(!details[0]) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Details do not exist",
             "param": "order_id",
-        })
+        }])
     );
 
     // Success Response

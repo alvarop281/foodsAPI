@@ -14,19 +14,19 @@ export async function adminAccess( req: Request, res: Response, next: NextFuncti
     const type_of_user: string = await selectTypeOfUserById( userReq.id );
 
     if ( type_of_user === 'buyer' ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Unauthorized access",
             "param": "User",
-        })
+        }])
     )
 
     if ( type_of_user === 'admin' ) return next();
 
     return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Unauthorized access",
             "param": "Unauthorized",
-        })
+        }])
     )
 
 }

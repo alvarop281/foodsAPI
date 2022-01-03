@@ -28,10 +28,10 @@ export async function signin(req: Request, res: Response): Promise<Response> {
     // Fail response
     if(oldDni || oldPhone) 
         return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "DNI or phone_number already used",
                 "param": "phone_number or dni",
-            })
+            }])
         );
 
     // Use user model
@@ -59,10 +59,10 @@ export async function login( req: Request, res: Response ) {
         // Compare password
         const isValid = await bcrypt.compare(req.body.password, passwordCredential);
         if(!isValid) return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "Invalid password",
                 "param": "password",
-            })
+            }])
         )
 
         // Retrieve user_id to create the token
@@ -79,10 +79,10 @@ export async function login( req: Request, res: Response ) {
         
     }catch( err ){
         return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "Invalid phone number",
                 "param": "phone_number",
-            })
+            }])
         )
     }
 

@@ -13,10 +13,10 @@ export function validateResourceOwner(req: Request, res: Response, next: NextFun
     const userReq: UserI = req.user;
 
     if ( userReq.id != id ) return res.status(403).json(
-        failResponse({
+        failResponse([{
             "msg": "Unauthorized access",
             "param": "userId",
-        })
+        }])
     )
 
     next();

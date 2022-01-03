@@ -25,10 +25,10 @@ export async function getAllFoodsByCategoryId( req: Request, res: Response ) {
 
     // Fail response
     if(!foods[0]) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Foods do not exist",
             "param": "category_id",
-        })
+        }])
     );
 
     // Success Response
@@ -44,10 +44,10 @@ export async function getFoodById( req: Request, res: Response ) {
 
     // Fail response
     if(!food) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Food do not exist",
             "param": "category_id",
-        })
+        }])
     );
 
     // Success Response
@@ -63,10 +63,10 @@ export async function createFood( req: Request, res: Response ){
 
     // Verify if category exist
     if(!category) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Category do not exist",
             "param": "category_id",
-        })
+        }])
     );
 
     const newFood: FoodI = req.body;
@@ -77,10 +77,10 @@ export async function createFood( req: Request, res: Response ){
         const img_2: any = req.files.img_2;
 
         if(!img_1 || !img_2) return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "images does not exist",
                 "param": "img_1 or img_2",
-            })
+            }])
         );
 
         // Try insert img_1
@@ -113,10 +113,10 @@ export async function deleteFood( req: Request, res: Response ){
     // Check if food exist
     const food: FoodI = await selectFoodById( id );
     if(!food) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Food do not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Try to delete img_1
@@ -147,10 +147,10 @@ export async function updateFood( req: Request, res: Response ){
 
     const oldfood = await selectFoodById( id );
     if ( !oldfood ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Food do not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Save and store image
@@ -161,12 +161,12 @@ export async function updateFood( req: Request, res: Response ){
         if( img_1 ){
             const errorInsert_1 = await tryInsertImage( img_1 );
             if( errorInsert_1 ) return res.status(401).json(
-                failResponse( {errors2: errorInsert_1} )
+                failResponse( [{errors2: errorInsert_1}] )
             );
 
             const errorDelete_1 = await  tryDeleteImage( oldfood['img_1'] );
             if ( errorDelete_1 ) return res.status(401).json(
-                failResponse({ errors1: errorDelete_1 })
+                failResponse( [{ errors1: errorDelete_1 }] )
             );
 
             food['img_1'] = img_1.name;
@@ -175,11 +175,11 @@ export async function updateFood( req: Request, res: Response ){
         if( img_2 ){
             const errorInsert_2 = await tryInsertImage( img_2 );
             if( errorInsert_2 ) return res.status(401).json(
-                failResponse( {errors4: errorInsert_2} )
+                failResponse( [{errors4: errorInsert_2}] )
             );
             const errorDelete_2 = await  tryDeleteImage( oldfood['img_2'] );
             if ( errorDelete_2 ) return res.status(401).json(
-                failResponse({ errors3: errorDelete_2 })
+                failResponse( [{ errors3: errorDelete_2 }] )
             );
 
             food['img_2'] = img_2.name;
