@@ -22,10 +22,10 @@ export async function getAllCategories( req: Request, res: Response ) {
 
     // Fail response
     if(!categories[0]) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Categories do not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Success Response
@@ -46,10 +46,10 @@ export async function getCategoryByID( req: Request, res: Response ){
         )
     else
         return res.status(401).json(
-            failResponse({
+            failResponse([{
                 "msg": "Category does not exist",
                 "param": "id",
-            })
+            }])
         );
 
 }
@@ -74,10 +74,10 @@ export async function updateCategory( req: Request, res: Response ) {
     // Check if category exist
     const isValid: CategoryI = await selectCategoryById(id);
     if(!isValid) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Category does not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Update category
@@ -98,19 +98,19 @@ export async function deleteCategory( req: Request, res: Response ) {
     // Check if category exist
     const isValid: CategoryI = await selectCategoryById(id);
     if(!isValid) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Category does not exist",
             "param": "id",
-        })
+        }])
     );
 
     // Check if category has foods
     const foods: FoodI[] = await selectAllFoodsByCategoryId( id );
     if ( foods ) return res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "Category has foods",
             "param": "id",
-        })
+        }])
     );
 
     // Delete category

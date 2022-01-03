@@ -31,10 +31,10 @@ export async function updateUser( req: Request, res: Response ){
     const checkPhone: UserI = await selectUserPhoneByPhoneAndId( newUserData.phone_number, id );
     
     if ( checkPhone || checkDni ) res.status(401).json(
-        failResponse({
+        failResponse([{
             "msg": "DNI or Phone already used",
             "param": "phone_number or dni",
-        })
+        }])
     );
     else{
         // Update data
