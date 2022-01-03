@@ -42,7 +42,7 @@ export async function selectUserByPhone( phone: string ){
 export async function selectUserById(id:number) {
     const conn = await connect();
 
-    const user: any = await conn.query( 'SELECT full_name, dni, phone_number FROM users WHERE users.id = ?', id )
+    const user: any = await conn.query( 'SELECT id, full_name, dni, phone_number FROM users WHERE users.id = ?', id )
     conn.end();
     
     return user[0][0];
