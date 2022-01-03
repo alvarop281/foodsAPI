@@ -6,7 +6,7 @@ import { FoodI } from '../interfaces/FoodI';
 export async function selectAllFoodsByCategoryId( id: string ) {
     const conn = await connect();
 
-    const foods: any = await conn.query( 'SELECT * FROM foods WHERE category_id=?', id );
+    const foods: any = await conn.query( 'SELECT id, title, price, img_1, img_2, description, ingredients, category_id FROM foods WHERE category_id=?', id );
     conn.end();
     
     return foods[0];
@@ -15,7 +15,7 @@ export async function selectAllFoodsByCategoryId( id: string ) {
 export async function selectFoodById( id: string ) {
     const conn = await connect();
 
-    const food: any = await conn.query( 'SELECT * FROM foods WHERE id=?', id );
+    const food: any = await conn.query( 'SELECT id, title, price, img_1, img_2, description, ingredients, category_id FROM foods WHERE id=?', id );
     conn.end();
     
     return food[0][0];
