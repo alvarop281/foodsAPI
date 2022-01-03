@@ -106,7 +106,7 @@ export async function deleteCategory( req: Request, res: Response ) {
 
     // Check if category has foods
     const foods: FoodI[] = await selectAllFoodsByCategoryId( id );
-    if ( foods ) return res.status(401).json(
+    if ( foods.length !== 0 ) return res.status(401).json(
         failResponse({
             "msg": "Category has foods",
             "param": "id",
