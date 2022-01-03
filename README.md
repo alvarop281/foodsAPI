@@ -14,6 +14,7 @@ Steps to follow to run the app
     HOST=
     USER=
     DB=foods
+    PASSWORD=
     TOKEN_SECRET=
 
 4.- take the foods.sql file, located in the sql folder, at the root of the project and import it into MySQL

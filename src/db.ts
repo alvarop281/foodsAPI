@@ -5,6 +5,7 @@ export async function connect(){
         host: process.env.HOST,
         user: process.env.USER,
         database: process.env.DB,
+        password : process.env.PASSWORD,
         connectionLimit: 10
     });
 
