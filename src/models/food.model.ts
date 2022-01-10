@@ -46,3 +46,13 @@ export async function updateAFood ( data: any, id: string ){
 
     return 0;
 }
+
+
+export async function selectFoodByTitleAndDescriptionAndIngredientsAndPrice( title: string, description: string, ingredients: string, price: number ) {
+    const conn = await connect();
+
+    const food: any = await conn.query( 'SELECT id, title, price, img_1, img_2, description, ingredients, category_id FROM foods WHERE title=? and description=? and ingredients=? and price=?', [ title, description, ingredients, price ] );
+    conn.end();
+    
+    return food[0][0];
+}

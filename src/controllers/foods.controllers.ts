@@ -14,7 +14,8 @@ import {
     selectFoodById,
     createAFood,
     deleteFoodById,
-    updateAFood
+    updateAFood,
+    selectFoodByTitleAndDescriptionAndIngredientsAndPrice
 } from '../models/food.model';
 import { selectCategoryById } from '../models/category.model';
 
@@ -101,9 +102,16 @@ export async function createFood( req: Request, res: Response ){
 
     await createAFood( newFood );
 
+    const food: FoodI = await selectFoodByTitleAndDescriptionAndIngredientsAndPrice(
+        newFood['title'],
+        newFood['description'], 
+        newFood['ingredients'], 
+        newFood['price']
+    );
+
      // Success Response
      return res.status(201).json(
-        successResponse( { newFood }, { message: "Food was created" } )
+        successResponse( { food }, { message: "Food was created" } )
     )
 }
 
