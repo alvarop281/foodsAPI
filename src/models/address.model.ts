@@ -6,7 +6,7 @@ import { AddressI } from "../interfaces/Address";
 export async function selectAdrressesByUserId( userId: string ){
     const conn = await connect();
 
-    const categories: any = await conn.query( 'SELECT * FROM addresses WHERE addresses.user_id=?', userId );
+    const categories: any = await conn.query( 'SELECT id, address, reference, user_id FROM addresses WHERE addresses.user_id=?', userId );
     conn.end();
     
     return categories[0];
@@ -24,7 +24,7 @@ export async function createAAddress( newAddress: AddressI ){
 export async function selectAdrressesByUserIAndDescriptionAndReference( userId: string, address: string, reference: string ){
     const conn = await connect();
 
-    const categories: any = await conn.query( 'SELECT * FROM addresses WHERE addresses.user_id=? AND addresses.address = ? AND addresses.reference =?', [ userId, address, reference ] );
+    const categories: any = await conn.query( 'SELECT id, address, reference, user_id FROM addresses WHERE addresses.user_id=? AND addresses.address = ? AND addresses.reference =?', [ userId, address, reference ] );
     conn.end();
     
     return categories[0][0];
