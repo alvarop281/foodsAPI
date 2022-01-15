@@ -14,7 +14,7 @@ export async function createAAddress( newOrder: OrdersI ){
 export async function selectActiveOrderByUserId( userId: string ){
     const conn = await connect();
 
-    const order: any = await conn.query( 'SELECT * FROM orders WHERE orders.user_id=? AND orders.status = "active"', userId );
+    const order: any = await conn.query( 'SELECT id, payment_type, proof_of_payment, delivery_method, commentary, status, address_id, user_id FROM orders WHERE orders.user_id=? AND orders.status = "active"', userId );
     conn.end();
     
     return order[0][0];
@@ -23,7 +23,7 @@ export async function selectActiveOrderByUserId( userId: string ){
 export async function selectAllOrderByUserId( userId: string ){
     const conn = await connect();
 
-    const orders: any = await conn.query( 'SELECT * FROM orders WHERE orders.user_id=? ', userId );
+    const orders: any = await conn.query( 'SELECT id, payment_type, proof_of_payment, delivery_method, commentary, status, address_id, user_id FROM orders WHERE orders.user_id=? ', userId );
     conn.end();
     
     return orders[0];
