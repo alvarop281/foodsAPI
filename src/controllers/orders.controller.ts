@@ -54,7 +54,7 @@ export async function selectAllOrders( req: Request, res: Response ){
 
     // Success Response
     return res.status(200).json(
-        successResponse( { orders }, { } )
+        successResponse( { orders }, [] )
     )
 
 }
