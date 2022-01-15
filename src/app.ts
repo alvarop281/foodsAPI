@@ -78,6 +78,7 @@ export class App{
             //put     http://localhost:3000/foods/api/v1/users/:id/orders/:id     Only the owner
 
         this.app.use('/foods/api/v1/orders', orderDetailRouter);
+            //get     http://localhost:3000/foods/api/v1/orders/:id/details/      Only the owner
             //post    http://localhost:3000/foods/api/v1/orders/:id/details/      Only the owner
             //put     http://localhost:3000/foods/api/v1/orders/:id/details/:id   Only the owner
             //delete  http://localhost:3000/foods/api/v1/orders/:id/details/:id   Only the owner
