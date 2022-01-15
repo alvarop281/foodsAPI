@@ -151,7 +151,7 @@ export async function deleteFood( req: Request, res: Response ){
 export async function updateFood( req: Request, res: Response ){
     // Save the params
     const id = req.params.foodId;
-    const food: FoodI = req.body;
+    let food: FoodI = req.body;
 
     const oldfood = await selectFoodById( id );
     if ( !oldfood ) return res.status(401).json(
@@ -195,6 +195,8 @@ export async function updateFood( req: Request, res: Response ){
     }
 
     await updateAFood( food, id );
+
+    food= await selectFoodById( id );
 
     // Success Response
     return res.status(200).json(
