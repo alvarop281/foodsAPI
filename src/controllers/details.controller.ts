@@ -86,7 +86,7 @@ export async function deleteDetail( req: Request, res: Response ){
     if ( !detail ) return res.status(401).json(
         failResponse([{
             "msg": "Bad request",
-            "param": "food_id",
+            "param": "detail_id",
         }])
     );
 
