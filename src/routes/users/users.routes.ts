@@ -70,8 +70,8 @@ router.route('/:userId/orders')
 router.route('/:userId/orders/:orderId')
     .put([
         body('id').optional().not().exists().withMessage('Invalid request'),
-        check('payment_type').optional().isIn(['cash', 'transfer', 'card']).withMessage('You must indicate a payment type'),
-        check('delivery_method').optional().isIn(['delivery', 'pickUp']).withMessage('You must indicate a delivery method'),
+        check('payment_type').isIn(['cash', 'transfer', 'card']).withMessage('You must indicate a payment type'),
+        check('delivery_method').isIn(['delivery', 'pickUp']).withMessage('You must indicate a delivery method'),
         body('commentary').isLength({ min: 2 }).withMessage('must be at least 2 chars long'),
         body('status').optional().not().exists().withMessage('Invalid request'),
         body('address_id').isLength({ min: 1 }).withMessage('must be at least 2 chars long'),
